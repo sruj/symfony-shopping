@@ -5,6 +5,8 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Entity\Product;
+use AppBundle\Form\ProductType;
 
 class AdminController extends Controller
 {
@@ -22,5 +24,39 @@ class AdminController extends Controller
     public function productsAction(Request $request)
     {
         return $this->render('AppBundle::admin/product_list.html.twig');
+    }
+
+    /**
+     * @Route("/admin/new-product", name="admin_add_product")
+     */
+    public function addProduct(Request $request)
+    {
+        $product = new Product();
+        $form = $this->createForm(ProductType::class, $product);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            return $this->redirectToRoute('admin_edit_product', ['id' => 1]);
+        }
+        return $this->render('AppBundle::admin/product.html.twig', [
+            'add' => true,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/admin/product/{id}", requirements={"id" = "\d+"}, name="admin_edit_product")
+     */
+    public function editProduct(Request $request)
+    {
+        $product = new Product();
+        $form = $this->createForm(ProductType::class, $product);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+        }
+        return $this->render('AppBundle::admin/product.html.twig', [
+            'add' => false,
+            'form' => $form->createView(),
+        ]);
     }
 }
