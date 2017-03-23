@@ -7,3 +7,11 @@ services:
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+
+   command.update-product:
+       class: AppBundle\Command\UpdateProduct
+       arguments: ['@doctrine.orm.entity_manager']
+
+   query.find-product-by-id:
+       class: AppBundle\Query\FindProductById
+       arguments: ['@doctrine.orm.entity_manager']

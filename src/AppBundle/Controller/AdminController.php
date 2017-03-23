@@ -35,6 +35,10 @@ class AdminController extends Controller
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->get('command.update-product')
+                ->setProduct($product)
+                ->run();
+
             return $this->redirectToRoute('admin_edit_product', ['id' => 1]);
         }
         return $this->render('AppBundle::admin/product.html.twig', [
@@ -48,11 +52,14 @@ class AdminController extends Controller
      */
     public function editProduct(Request $request)
     {
-        $product = new Product();
+        $productId = $request->get('id');
+        $product = $this->get('query.find-product-by-id')->find($productId);
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            
+            $this->get('command.update-product')
+                ->setProduct($product)
+                ->run();
         }
         return $this->render('AppBundle::admin/product.html.twig', [
             'add' => false,
