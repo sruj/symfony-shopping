@@ -3,6 +3,11 @@
 {% block content %}
 
     <h1>{{ add ? 'Dodaj' : 'Edytuj' }} produkt</h1>
+
+    {% for flashMessage in app.session.flashbag.get('success') %}
+        {{ flashMessage }}
+    {% endfor %}
+    
     {{ form_start(form) }}
     {{ form_errors(form) }}
     {{ form_widget(form) }}

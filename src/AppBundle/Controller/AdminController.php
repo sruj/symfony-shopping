@@ -35,7 +35,7 @@ class AdminController extends Controller
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->get('command.update-product')
+            $this->get('command.add-product')
                 ->setProduct($product)
                 ->run();
 
