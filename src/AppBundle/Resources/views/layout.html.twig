@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf8">
+        <title>Shopping</title>
+    </head>
+    <body>
+        <nav>
+            {% if app.user %}
+                <b>Witaj {{ app.user.username }}!</b>
+            {% endif %}
+            <a href="{{ path('homepage') }}">Lista produktów</a>&nbsp;&bull;
+            {% if app.user %}
+            <a href="{{ path('admin_product_list') }}">Zarządzaj produktami</a>&nbsp;&bull;
+                <a href="{{ path('auth_logout') }}">Wyloguj</a>
+            {% else %}
+                <a href="{{ path('auth_login') }}">Logowanie</a>
+            {% endif %}
+        </nav>
+        {% block content %}
+
+        {% endblock %}
+    </body>
+</html>
