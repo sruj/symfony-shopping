@@ -14,13 +14,16 @@ class AddProduct implements CommandInterface
 
     private $mailer;
 
+    private $twig;
+
     private $product = null;
 
-    public function __construct(EntityManager $em, Session $session, \Swift_Mailer $mailer)
+    public function __construct(EntityManager $em, Session $session, \Swift_Mailer $mailer, \Twig_Environment $twig)
     {
         $this->em = $em;
         $this->session = $session;
         $this->mailer = $mailer;
+        $this->twig = $twig;
     }
 
     public function setProduct(Product $product) : AddProduct
@@ -55,9 +58,10 @@ class AddProduct implements CommandInterface
             ->setFrom('send@example.com')
             ->setTo('admin@example.com')
             ->setBody(
-                $this->renderView('AppBundle::emails/new-product.html.twig', [
-                    'name' => $product->name
+                $this->twig->render('AppBundle::emails/new-product.html.twig', [
+                    'name' => $this->product->name
                 ]), 'text/html'
             );
+        return $message;
     }
 }

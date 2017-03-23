@@ -10,7 +10,7 @@ services:
 
    command.add-product:
        class: AppBundle\Command\AddProduct
-       arguments: ['@doctrine.orm.entity_manager', '@session', '@mailer']
+       arguments: ['@doctrine.orm.entity_manager', '@session', '@mailer', '@twig']
 
    command.update-product:
        class: AppBundle\Command\UpdateProduct
