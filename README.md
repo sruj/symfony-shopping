@@ -2,6 +2,9 @@
 
 ##### Prosty projekt wykonany zgodnie z poniższymi wymaganiami
 
+###### Login: admin
+###### Hasło: password
+
 1. Postaw nowy projekt z uzyciem symfony 3.2
 2. Przygotuj (bardzo) prosty sklep, korzystajac z symfony i doctrine jako orm do bazy danych
 3. Wymagania funkcjonalne:
