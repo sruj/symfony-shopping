@@ -7,8 +7,11 @@
 
     {% for item in list %}
         <div>
-            {{ item.name }}
+            Produkt: {{ item.name }}<br>
+            Opis: {{ item.description }}<br>
+            Cena: {{ item.price }} PLN
         </div>
+        <hr>
     {% endfor %}
     <br>
     {{ knp_pagination_render(list) }}
