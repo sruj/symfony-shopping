@@ -11,7 +11,7 @@ Hasło: password
 #### Testy
 Z powodu konfliktu pomiędzy phpunit a symfony, testy należy uruchamiać komendą:
 ```vendor/bin/phpunit```
-będąc w katalogu głównym projektu
+będąc w katalogu głównym projektu. Więcej informacji pod linkiem: [klik](https://github.com/sebastianbergmann/phpunit/issues/2015)
 
 #### Wymagania
 1. Postaw nowy projekt z uzyciem symfony 3.2
