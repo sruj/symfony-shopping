@@ -2,9 +2,9 @@
 
 namespace Tests\AppBundle\Controller;
 
-use PHPUnit\Framework\TestCase;
+use Tests\AppBundle\Integration\IntegrationAbstract;
 
-class FindProductByIdTest extends TestCase
+class FindProductByIdTest extends IntegrationAbstract
 {
     protected function setUp()
     {

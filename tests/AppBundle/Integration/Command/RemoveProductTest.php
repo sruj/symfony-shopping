@@ -2,9 +2,9 @@
 
 namespace Tests\AppBundle\Integration\Command;
 
-use PHPUnit\Framework\TestCase;
+use Tests\AppBundle\Integration\IntegrationAbstract;
 
-class RemoveProductTest extends TestCase
+class RemoveProductTest extends IntegrationAbstract
 {
     protected function setUp()
     {

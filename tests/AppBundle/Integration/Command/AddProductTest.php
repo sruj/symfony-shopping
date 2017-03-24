@@ -2,15 +2,15 @@
 
 namespace Tests\AppBundle\Integration\Command;
 
-use PHPUnit\Framework\TestCase;
+use Tests\AppBundle\Integration\IntegrationAbstract;
 
-class AddProductTest extends TestCase
+class AddProductTest extends IntegrationAbstract
 {
     protected function setUp()
     {
         
     }
-
+    
     public function testAddingProduct()
     {
         
