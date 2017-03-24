@@ -1,14 +1,19 @@
 # Symfony Shopping
 
-##### Prosty projekt wykonany zgodnie z poniższymi wymaganiami
+Prosty projekt wykonany zgodnie z poniższymi wymaganiami
 
-###### Login: admin
-###### Hasło: password  
-#
-> Notka: Z powodu konfliktu pomiędzy phpunit a symfony, testy należy uruchamiać komendą:
-> vendor/bin/phpunit
-> będąc w katalogu głównym projektu
+#### Logowanie do serwisu
+```
+Login: admin
+Hasło: password
+```
 
+#### Testy
+Z powodu konfliktu pomiędzy phpunit a symfony, testy należy uruchamiać komendą:
+```vendor/bin/phpunit```
+będąc w katalogu głównym projektu
+
+#### Wymagania
 1. Postaw nowy projekt z uzyciem symfony 3.2
 2. Przygotuj (bardzo) prosty sklep, korzystajac z symfony i doctrine jako orm do bazy danych
 3. Wymagania funkcjonalne:
