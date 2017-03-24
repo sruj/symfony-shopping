@@ -29,48 +29,8 @@ class AddProductTest extends IntegrationAbstract
         $this->assertEquals($product->price, $foundProduct->price);
     }
 
-    /**
-     * @return Product
-     */
-    private function createProduct()
-    {
-        $product = new Product();
-        $product->name = 'well-known-name';
-        for ($i=0; $i<100; $i++) {
-           $product->description .= 'a';    
-        }
-        $product->price = 1.23;
-        return $product;
-    }
-
-    /**
-     * @param Product $whichProduct
-     * @return bool
-     */
-    private function productExistsOnDb(Product $whichProduct)
-    {
-        $product = static::$em->getRepository(Product::class)->findOneBy([
-            'id' => $whichProduct->id,
-        ]);
-        if ($product === null)
-        {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * @return Product
-     */
-    private function findProduct(Product $product)
-    {
-        return static::$em->getRepository(Product::class)->findOneBy([
-            'id' => $product->id,
-        ]);
-    }
-
     protected function tearDown()
     {
-        
+        $this->clearProductsTable();
     }
 }

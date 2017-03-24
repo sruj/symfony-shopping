@@ -18,6 +18,6 @@ class FindProductByIdTest extends IntegrationAbstract
 
     protected function tearDown()
     {
-        
+        $this->clearProductsTable();
     }
 }

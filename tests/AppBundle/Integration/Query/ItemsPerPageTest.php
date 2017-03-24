@@ -23,6 +23,6 @@ class ItemsPerPageTest extends IntegrationAbstract
 
     protected function tearDown()
     {
-        
+        $this->clearProductsTable();
     }
 }
