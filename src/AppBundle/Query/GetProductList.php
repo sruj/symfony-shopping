@@ -22,7 +22,7 @@ class GetProductList extends AbstractQuery
     public function getList(int $currentPage)
     {
         $repository = $this->em->getRepository(Product::class);
-        $query = $this->em->createQuery("SELECT p FROM AppBundle:Product p");
+        $query = $this->em->createQuery("SELECT p FROM AppBundle:Product p order by p.id desc");
 
         $pagination = $this->paginator->paginate($query, $currentPage, $this->itemsPerPage);
         return $pagination;

@@ -25,6 +25,7 @@ class ProductType extends AbstractType
             ->add('price', MoneyType::class, [
                 'required' => true,
                 'label' => 'Cena',
+                'invalid_message' => 'Podany format jest niepoprawny. Proszę użyć formatu 123.45',
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'Zatwierdź',
