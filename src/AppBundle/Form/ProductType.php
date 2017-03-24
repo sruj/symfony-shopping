@@ -27,7 +27,7 @@ class ProductType extends AbstractType
                 'label' => 'Cena',
             ])
             ->add('save', SubmitType::class, [
-                'label' => 'Dodaj',
+                'label' => 'Zatwierdź',
             ])
         ;
     }

@@ -36,6 +36,7 @@ class AdminController extends Controller
     public function addProduct(Request $request)
     {
         $product = new Product();
+        
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -43,7 +44,7 @@ class AdminController extends Controller
                 ->setProduct($product)
                 ->run();
 
-            return $this->redirectToRoute('admin_edit_product', ['id' => 1]);
+            return $this->redirectToRoute('admin_edit_product', ['id' => $product->id]);
         }
         return $this->render('AppBundle::admin/product.html.twig', [
             'add' => true,
@@ -58,6 +59,7 @@ class AdminController extends Controller
     {
         $productId = $request->get('id');
         $product = $this->get('query.find-product-by-id')->find($productId);
+
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -69,5 +71,20 @@ class AdminController extends Controller
             'add' => false,
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/admin/product/{id}/remove", requirements={"id" = "\d+"}, name="admin_remove_product")
+     */
+    public function removeProduct(Request $request)
+    {
+        $productId = $request->get('id');
+        $product = $this->get('query.find-product-by-id')->find($productId);
+        
+        $this->get('command.remove-product')
+            ->setProduct($product)
+            ->run();
+
+        return $this->redirectToRoute('admin_product_list');
     }
 }

@@ -3,6 +3,10 @@
 {% block content %}
     <h1>Zarządzaj produktami</h1>
 
+    {% for flashMessage in app.session.flashbag.get('success') %}
+        {{ flashMessage }}
+    {% endfor %}
+
     <a href="{{ path('admin_add_product') }}">Dodaj produkt</a>
 
     <hr>
@@ -13,6 +17,8 @@
     {% for item in list %}
         <div>
             {{ item.name }}
+            <a href="{{ path('admin_edit_product', {'id': item.id}) }}">Edytuj</a>
+            <a href="{{ path('admin_remove_product', {'id': item.id}) }}" onclick="return confirm('Czy na pewno chcesz usunąć ten produkt?');">Usuń</a>
         </div>
     {% endfor %}
     <br>
