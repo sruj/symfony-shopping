@@ -19,11 +19,15 @@ class AdminController extends Controller
     }
 
     /**
-     * @Route("/admin/products", name="admin_product_list")
+     * @Route("/admin/products/{page}", requirements={"page" = "\d+"}, defaults={"page" = "1"}, name="admin_product_list")
      */
     public function productsAction(Request $request)
     {
-        return $this->render('AppBundle::admin/product_list.html.twig');
+        $page = $request->get('page', 1);
+        $productList = $this->get('query.get-product-list')->getList($page);
+        return $this->render('AppBundle::admin/product_list.html.twig', [
+            'list' => $productList,
+        ]);
     }
 
     /**

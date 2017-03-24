@@ -19,3 +19,7 @@ services:
    query.find-product-by-id:
        class: AppBundle\Query\FindProductById
        arguments: ['@doctrine.orm.entity_manager']
+
+   query.get-product-list:
+       class: AppBundle\Query\GetProductList
+       arguments: ['@doctrine.orm.entity_manager', '@knp_paginator']
