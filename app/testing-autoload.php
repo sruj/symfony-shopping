@@ -30,3 +30,10 @@ $input = new ArrayInput(array(
     'command' => 'doctrine:database:create',
 ));
 $command->run($input, new ConsoleOutput());
+
+$command = new CreateSchemaDoctrineCommand();
+$application->add($command);
+$input = new ArrayInput(array(
+    'command' => 'doctrine:schema:create',
+));
+$command->run($input, new ConsoleOutput());

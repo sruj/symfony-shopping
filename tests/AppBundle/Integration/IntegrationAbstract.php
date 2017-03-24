@@ -11,6 +11,7 @@ class IntegrationAbstract extends KernelTestCase
     {
         $kernel = static::createKernel();
         $kernel->boot();
+        static::$kernel = $kernel;
 
         static::$em = $kernel->getContainer()->get('doctrine.orm.entity_manager');
     }
