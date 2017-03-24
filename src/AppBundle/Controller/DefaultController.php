@@ -13,6 +13,10 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        return $this->render('AppBundle::index/index.html.twig');
+        $page = $request->get('page', 1);
+        $productList = $this->get('query.get-product-list')->getList($page);
+        return $this->render('AppBundle::index/index.html.twig', [
+            'list' => $productList,
+        ]);
     }
 }

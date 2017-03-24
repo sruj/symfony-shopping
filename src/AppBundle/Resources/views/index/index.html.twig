@@ -2,4 +2,14 @@
 
 {% block content %}
     <h1>Lista produktów</h1>
+    <div>Znaleziono produktów: {{ list.getTotalItemCount }}</div>
+    <br>
+
+    {% for item in list %}
+        <div>
+            {{ item.name }}
+        </div>
+    {% endfor %}
+    <br>
+    {{ knp_pagination_render(list) }}
 {% endblock %}
