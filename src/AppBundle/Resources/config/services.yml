@@ -1,0 +1,22 @@
+parameters:
+
+services:
+   command.add-product:
+       class: AppBundle\Command\AddProduct
+       arguments: ['@doctrine.orm.entity_manager', '@session', '@mailer', '@twig']
+
+   command.update-product:
+       class: AppBundle\Command\UpdateProduct
+       arguments: ['@doctrine.orm.entity_manager', '@session']
+
+   command.remove-product:
+       class: AppBundle\Command\RemoveProduct
+       arguments: ['@doctrine.orm.entity_manager', '@session']
+
+   query.find-product-by-id:
+       class: AppBundle\Query\FindProductById
+       arguments: ['@doctrine.orm.entity_manager']
+
+   query.get-product-list:
+       class: AppBundle\Query\GetProductList
+       arguments: ['@doctrine.orm.entity_manager', '@knp_paginator']
