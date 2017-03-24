@@ -8,26 +8,29 @@ class UpdateProductTest extends IntegrationAbstract
 {
     private $command;
 
+    private $product;
+
     private $newProductName = 'new-name';
 
     protected function setUp()
     {
         $this->command = static::$kernel->getContainer()->get('command.update-product');
+
+        $this->product = $this->createProduct();
+        static::$em->persist($this->product);
+        static::$em->flush();
     }
 
     public function testUpdatingProduct()
     {
-        $product = $this->createProduct();
-        static::$em->persist($product);
-        static::$em->flush();
+        $this->assertTrue($this->productExistsOnDb($this->product));
+        $this->assertEquals($this->product->name, $this->dummyProductName);
 
-        $this->assertTrue($this->productExistsOnDb($product));
-        $this->assertEquals($product->name, $this->dummyProductName);
-        $product->name = $this->newProductName;
-        $this->command->setProduct($product)->run();
-        $this->assertTrue($this->productExistsOnDb($product));
+        $this->product->name = $this->newProductName;
+        $this->command->setProduct($this->product)->run();
+        $this->assertTrue($this->productExistsOnDb($this->product));
 
-        $updatedProduct = $this->findProduct($product);
+        $updatedProduct = $this->findProduct($this->product);
         $this->assertEquals($updatedProduct->name, $this->newProductName);
     }
 
