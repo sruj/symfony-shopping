@@ -15,35 +15,33 @@ class ItemsPerPageTest extends IntegrationAbstract
         $this->createThirtyProducts();
     }
 
-    public function testItemsPerPage_3()
+    public function data_getTestData()
     {
-        $this->query->itemsPerPage = 3;
-        $pageOne = $this->query->getList(1);
-        $this->assertEquals(count($pageOne), 3);
-
-        $pageTwo = $this->query->getList(2);
-        $this->assertEquals(count($pageTwo), 3);
-
-        $pageTen = $this->query->getList(10);
-        $this->assertEquals(count($pageTen), 3);
+        return [
+            [3, [1 => 3, 2 => 3, 10 => 3]],
+            [7, [1 => 7, 2 => 7, 5 => 2]],
+        ];
     }
 
-    public function testItemsPerPage_7()
+    /**
+     * @dataProvider data_getTestData
+     * @param int $itemsPerPage
+     * @param array $pageData
+     */
+    public function testItemsPerPage(int $itemsPerPage, array $pageData)
     {
-        $this->query->itemsPerPage = 7;
-        $pageOne = $this->query->getList(1);
-        $this->assertEquals(count($pageOne), 7);
-
-        $pageTwo = $this->query->getList(2);
-        $this->assertEquals(count($pageTwo), 7);
-
-        $pageFive = $this->query->getList(5);
-        $this->assertEquals(count($pageFive), 2);
+        $this->query->itemsPerPage = $itemsPerPage;
+        foreach ($pageData as $pageNo => $countNeeded)
+        {
+            $page = $this->query->getList($pageNo);
+            $this->assertEquals(count($page), $countNeeded);
+        }
     }
 
     private function createThirtyProducts()
     {
-        for ($i=0; $i<30; $i++) {
+        for ($i=0; $i<30; $i++)
+        {
             $product = $this->createProduct();
             static::$em->persist($product);
         }
